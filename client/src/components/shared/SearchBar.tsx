@@ -1,7 +1,12 @@
 import React from 'react';
-
+import { Input, message } from 'antd';
 export default function SearchBar() {
     return(
-        <h1>This is the search bar</h1>
+        <Input.Search
+        placeholder="Search"
+        enterButton="Search"
+        size="large"
+        allowClear
+      />
     )
 }
