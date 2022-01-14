@@ -1,8 +1,47 @@
 import { NextFunction, Request, Response } from 'express';
 import logging from '../config/logging';
 import { Connect, Query } from '../config/mysql';
-
 const NAMESPACE = 'Admin';
+const createAdmin = async (req: Request, res: Response, next: NextFunction) => {
+    logging.info(NAMESPACE, 'Inserting admin');
+
+    let { email, firstName, lastName, birthday, gender, password, createdAt, updatedAt } = req.body;
+  
+    let query = `INSERT INTO user (email, firstName, lastName, birthday, gender, type, password, createdAt, updatedAt)
+     VALUES ("${email}", "${firstName}", "${lastName}", "${birthday}", "${gender}", "admin", "${password}", "${createdAt}", "${updatedAt}")`;
+
+    Connect()
+        .then((connection) => {
+            Query(connection, query)
+                .then((result) => {
+                    logging.info(NAMESPACE, 'admin created: ', result);
+
+                    return res.status(200).json({
+                        result
+                    });
+                })
+                .catch((error) => {
+                    logging.error(NAMESPACE, error.message, error);
+
+                    return res.status(200).json({
+                        message: error.message,
+                        error
+                    });
+                })
+                .finally(() => {
+                    logging.info(NAMESPACE, 'Closing connection.');
+                    connection.end();
+                });
+        })
+        .catch((error) => {
+            logging.error(NAMESPACE, error.message, error);
+
+            return res.status(200).json({
+                message: error.message,
+                error
+            });
+        });
+};
 const getAllAdmin = async (req: Request, res: Response, next: NextFunction) => {
     logging.info(NAMESPACE, 'Getting all Admin');
 
@@ -78,4 +117,4 @@ const getAdminByID = async (req: Request, res: Response, next: NextFunction) => 
         });
 };
 
-export default { getAllAdmin, getAdminByID };
+export default { getAllAdmin, getAdminByID, createAdmin };
