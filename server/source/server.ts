@@ -4,7 +4,8 @@ import express from 'express';
 import logging from './config/logging';
 import config from './config/config';
 import coursesRoutes from './routes/courses';
-
+import usersRoutes from './routes/users';
+import adminRoutes from './routes/admin';
 const NAMESPACE = 'Server';
 const router = express();
 
@@ -40,7 +41,8 @@ router.use((req, res, next) => {
 
 /** Routes go here */
 router.use('/api/courses', coursesRoutes);
-
+router.use('/api/users', usersRoutes);
+router.use('/api/admin', adminRoutes);
 /** Error handling */
 router.use((req, res, next) => {
     const error = new Error('Not found');

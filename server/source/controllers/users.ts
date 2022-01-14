@@ -2,17 +2,17 @@ import { NextFunction, Request, Response } from 'express';
 import logging from '../config/logging';
 import { Connect, Query } from '../config/mysql';
 
-const NAMESPACE = 'Courses';
-const getAllCourses = async (req: Request, res: Response, next: NextFunction) => {
-    logging.info(NAMESPACE, 'Getting all courses.');
+const NAMESPACE = 'Users';
+const getAllUsers = async (req: Request, res: Response, next: NextFunction) => {
+    logging.info(NAMESPACE, 'Getting all users.');
 
-    let query = 'SELECT * FROM course';
+    let query = 'SELECT * FROM user Where type = "user"';
 
     Connect()
         .then((connection) => {
             Query(connection, query)
                 .then((results) => {
-                    logging.info(NAMESPACE, 'Retrieved courses: ', results);
+                    logging.info(NAMESPACE, 'Retrieved users: ', results);
 
                     return res.status(200).json({
                         results
@@ -40,16 +40,16 @@ const getAllCourses = async (req: Request, res: Response, next: NextFunction) =>
             });
         });
 };
-const getCourseByID = async (req: Request, res: Response, next: NextFunction) => {
-    logging.info(NAMESPACE, 'Getting course by id.');
-    const idCourse = req.params.id;
-    let query = `SELECT * FROM course where id = ${idCourse}`;
+const getUserByID = async (req: Request, res: Response, next: NextFunction) => {
+    logging.info(NAMESPACE, 'Getting user by ID.');
+    const id_user = req.params.id;
+    let query = `SELECT * FROM user Where type = "user" and id = ${id_user}`;
 
     Connect()
         .then((connection) => {
             Query(connection, query)
                 .then((results) => {
-                    logging.info(NAMESPACE, 'Retrieved courses: ', results);
+                    logging.info(NAMESPACE, 'Retrieved users: ', results);
 
                     return res.status(200).json({
                         results
@@ -78,4 +78,4 @@ const getCourseByID = async (req: Request, res: Response, next: NextFunction) =>
         });
 };
 
-export default { getAllCourses, getCourseByID };
+export default { getAllUsers, getUserByID };

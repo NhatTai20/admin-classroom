@@ -2,17 +2,17 @@ import { NextFunction, Request, Response } from 'express';
 import logging from '../config/logging';
 import { Connect, Query } from '../config/mysql';
 
-const NAMESPACE = 'Courses';
-const getAllCourses = async (req: Request, res: Response, next: NextFunction) => {
-    logging.info(NAMESPACE, 'Getting all courses.');
+const NAMESPACE = 'Admin';
+const getAllAdmin = async (req: Request, res: Response, next: NextFunction) => {
+    logging.info(NAMESPACE, 'Getting all Admin');
 
-    let query = 'SELECT * FROM course';
+    let query = 'SELECT * FROM user Where type = "admin"';
 
     Connect()
         .then((connection) => {
             Query(connection, query)
                 .then((results) => {
-                    logging.info(NAMESPACE, 'Retrieved courses: ', results);
+                    logging.info(NAMESPACE, 'Retrieved admin: ', results);
 
                     return res.status(200).json({
                         results
@@ -40,16 +40,16 @@ const getAllCourses = async (req: Request, res: Response, next: NextFunction) =>
             });
         });
 };
-const getCourseByID = async (req: Request, res: Response, next: NextFunction) => {
-    logging.info(NAMESPACE, 'Getting course by id.');
-    const idCourse = req.params.id;
-    let query = `SELECT * FROM course where id = ${idCourse}`;
+const getAdminByID = async (req: Request, res: Response, next: NextFunction) => {
+    logging.info(NAMESPACE, 'Getting Admin by ID');
+    const id_admin = req.params.id;
+    let query = `SELECT * FROM user Where type = "admin" and id = ${id_admin}`;
 
     Connect()
         .then((connection) => {
             Query(connection, query)
                 .then((results) => {
-                    logging.info(NAMESPACE, 'Retrieved courses: ', results);
+                    logging.info(NAMESPACE, 'Retrieved admin: ', results);
 
                     return res.status(200).json({
                         results
@@ -78,4 +78,4 @@ const getCourseByID = async (req: Request, res: Response, next: NextFunction) =>
         });
 };
 
-export default { getAllCourses, getCourseByID };
+export default { getAllAdmin, getAdminByID };
