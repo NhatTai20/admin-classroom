@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Breadcrumb } from 'antd';
+import { Breadcrumb, Menu, Dropdown } from 'antd';
 import { HomeOutlined, UserOutlined, EditFilled } from '@ant-design/icons';
 import {
     DeleteTwoTone,
@@ -24,9 +24,9 @@ import {
 import DataTable, { ExpanderComponentProps } from 'react-data-table-component';
 import SearchBar from '../../components/shared/SearchBar';
 import { ArrowDownOutlined } from '@ant-design/icons';
-
 // Be sure to include styles at some point, probably during your bootstraping
 import '@trendmicro/react-paginations/dist/react-paginations.css';
+import menu from 'antd/lib/menu';
 const sortIcon = <ArrowDownOutlined />;
 const UserListPage = () => {
     const [users, setUsers] = useState([]);
@@ -62,8 +62,11 @@ const UserListPage = () => {
       },
     {
       name: 'Student ID',
-      selector: (row: any) => row.studentId,
-      sortable: true,
+      //selector: (row: any) => row.studentId,
+      //sortable: true,
+      cell: (row: any) => <>
+        <input type="text" name='newId' placeholder={row.studentId} onChange={(e)=>{handleEditID(e.target.value, row.Id)}}/>
+        </>
     },
     {
       name: 'Created At',
@@ -140,3 +143,11 @@ function search(rows : any) {
     )
 };
 export default UserListPage;
+
+function handleEditID(newID: any, id: any) {
+    console.log(newID);
+    
+}
+
+
+
