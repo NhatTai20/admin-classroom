@@ -29,16 +29,16 @@ import { ArrowDownOutlined } from '@ant-design/icons';
 import '@trendmicro/react-paginations/dist/react-paginations.css';
 const sortIcon = <ArrowDownOutlined />;
 const UserListPage = () => {
-    const [users, setUsers] = useState([]);
+    const [admin, setAdmin] = useState([]);
   useEffect(() => {
    async function fetchMyAPI() {
-    let respone = await fetch('http://127.0.0.1:3001/api/users/getAllUser');
+    let respone = await fetch('http://127.0.0.1:3001/api/admin/getAllAdmin');
     let responeJSON = await respone.json();
-    setUsers(responeJSON.results);
+    setAdmin(responeJSON.results);
    }
    fetchMyAPI();
   },[]);
-  const data = users;
+  const data = admin;
   const columns = [
     {
         name: 'First name',
@@ -60,11 +60,6 @@ const UserListPage = () => {
         selector: (row: any) => row.email,
         sortable: true,
       },
-    {
-      name: 'Student ID',
-      selector: (row: any) => row.studentId,
-      sortable: true,
-    },
     {
       name: 'Created At',
       selector: (row: any) => row.createdAt,
@@ -93,6 +88,7 @@ function search(rows : any) {
   const ExpandedComponent: React.FC<ExpanderComponentProps<DataRow>> = ({ data }) => {
     return <pre>{JSON.stringify(data, null, 2)}</pre>;
   };
+  
     return (
         <>
             <Breadcrumb>
@@ -101,7 +97,7 @@ function search(rows : any) {
                 </Breadcrumb.Item>
                 <Breadcrumb.Item href="/users">
                     <UserOutlined />
-                    <span>User List</span>
+                    <span>Admin List</span>
                 </Breadcrumb.Item>
             </Breadcrumb>
             <div className="container-fluid">
@@ -112,13 +108,14 @@ function search(rows : any) {
                       
                         <Divider />
                         <DataTable
-                        title="Users list"
+                        title="Admin list"
                         pagination
                         keyField="id"
                         columns={columns}
                         data={search(data)}
                         sortIcon={sortIcon}
-                        subHeader subHeaderComponent={<input type="type" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search user"/>}
+                        highlightOnHover
+                        subHeader subHeaderComponent={<input type="type" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search admin"/>}
                         expandableRows expandableRowsComponent={ExpandedComponent}
                         />
                         <Modal
