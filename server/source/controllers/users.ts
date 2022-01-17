@@ -81,6 +81,8 @@ const ChangeStudentID = async (req: Request, res: Response, next: NextFunction) 
     logging.info(NAMESPACE, 'Changing user ID.');
     const id_user = req.params.id;
     const studentID = req.body.stdID;
+    console.log("body",req.body);
+    
     let query = `UPDATE user SET studentId = ${studentID} WHERE id = ${id_user}`;
 
     Connect()

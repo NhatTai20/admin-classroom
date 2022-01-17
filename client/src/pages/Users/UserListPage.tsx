@@ -65,7 +65,7 @@ const UserListPage = () => {
       //selector: (row: any) => row.studentId,
       //sortable: true,
       cell: (row: any) => <>
-        <input type="text" name='newId' placeholder={row.studentId} onChange={(e)=>{handleEditID(e.target.value, row.Id)}}/>
+        <input type="text" name='newId' placeholder={row.studentId} onChange={(e)=>{handleEditID(e.target.value, row.id)}}/>
         </>
     },
     {
@@ -73,6 +73,17 @@ const UserListPage = () => {
       selector: (row: any) => row.createdAt,
       sortable: true,
     },
+    {
+        name: 'Status',
+        cell: (row: any) => <>
+        {row.isBlocked ? <><p style={{color: "red"}}>Blocked</p></> : 
+        <>
+            <p style={{color: "green", marginRight: 15}}>Active</p>
+            <p style={{color: "red", cursor: "pointer"}} onClick={()=>{handleBan(row.id)}}>ban</p>
+        </>}
+        
+        </>
+      },
 ];
 const [q, setQ] = useState("");
 function search(rows : any) {
@@ -144,10 +155,37 @@ function search(rows : any) {
 };
 export default UserListPage;
 
-function handleEditID(newID: any, id: any) {
-    console.log(newID);
-    
+function handleEditID(stdID: any, id: any) {
+    const data = { stdID: stdID };
+    fetch(`http://127.0.0.1:3001/api/users/edit/${id}`,
+    {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+          },
+        body: JSON.stringify(data),
+    })
+    .then(response => response.json())
+    .then(result => {
+        console.log('Success:', result);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    })
 }
 
 
 
+function handleBan(id: any) {
+    fetch(`http://127.0.0.1:3001/api/users/ban/${id}`,
+    {
+        method: 'PUT'
+    })
+    .then(response => response.json())
+    .then(result => {
+        console.log('Success:', result);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    })
+}
