@@ -63,9 +63,9 @@ const RegisterPage = () => {
         createdAt: moment().format('YYYY-MM-DD HH:MM:SS'),
         updatedAt: moment().format('YYYY-MM-DD HH:MM:SS'),
     }).then((respone) => {
-        console.log(respone);
+        navigate('/admin');
     })
-    //navigate('/admin');
+    
   };
   
   return (
