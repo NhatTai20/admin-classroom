@@ -10,6 +10,7 @@ import UserEditPage from './pages/Users/UserEditPage';
 import UserListPage from './pages/Users/UserListPage';
 import UserViewPage from './pages/Users/UserViewPage';
 import AdminList from './pages/Admin/AdminList';
+
 function App() {
   return (
     <div>
@@ -26,6 +27,7 @@ function App() {
           <Route path="/users/edit/:id" element={<UserEditPage/>}/>
 
           <Route path="/admin" element={<AdminList/>}/>
+          <Route path="/admin/create" element={<RegisterPage/>}/>
 
         </Routes>
       </BrowserRouter>

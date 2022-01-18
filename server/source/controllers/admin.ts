@@ -4,11 +4,12 @@ import { Connect, Query } from '../config/mysql';
 const NAMESPACE = 'Admin';
 const createAdmin = async (req: Request, res: Response, next: NextFunction) => {
     logging.info(NAMESPACE, 'Inserting admin');
-
-    let { email, firstName, lastName, birthday, gender, password, createdAt, updatedAt } = req.body;
+    console.log("THIS IS THE REQ.BODY", req.body);
+    
+    let { email, firstName, lastName, gender, password, createdAt, updatedAt } = req.body;
   
-    let query = `INSERT INTO user (email, firstName, lastName, birthday, gender, type, password, createdAt, updatedAt)
-     VALUES ("${email}", "${firstName}", "${lastName}", "${birthday}", "${gender}", "admin", "${password}", "${createdAt}", "${updatedAt}")`;
+    let query = `INSERT INTO user (email, firstName, lastName, gender, type, password, createdAt, updatedAt)
+     VALUES ("${email}", "${firstName}", "${lastName}", "${gender}", "admin", "${password}", "${createdAt}", "${updatedAt}")`;
 
     Connect()
         .then((connection) => {

@@ -24,12 +24,14 @@ import {
 import DataTable, { ExpanderComponentProps } from 'react-data-table-component';
 import SearchBar from '../../components/shared/SearchBar';
 import { ArrowDownOutlined } from '@ant-design/icons';
-
+import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 // Be sure to include styles at some point, probably during your bootstraping
 import '@trendmicro/react-paginations/dist/react-paginations.css';
 const sortIcon = <ArrowDownOutlined />;
 const UserListPage = () => {
     const [admin, setAdmin] = useState([]);
+    const navigate = useNavigate();
   useEffect(() => {
    async function fetchMyAPI() {
     let respone = await fetch('http://127.0.0.1:3001/api/admin/getAllAdmin');
@@ -101,7 +103,15 @@ function search(rows : any) {
                 </Breadcrumb.Item>
             </Breadcrumb>
             <div className="container-fluid">
-              
+            <Row justify="end">
+            <Button
+          type="primary"
+          icon={<PlusOutlined />}
+          onClick={() => {navigate('/admin/create')}}
+        >
+          Create an admin
+        </Button>
+      </Row>
                 <Row>
                     {/* <!-- Individual column searching (text inputs) Starts--> */}
                     <Col span={24}>
