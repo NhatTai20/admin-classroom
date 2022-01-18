@@ -4,7 +4,6 @@ import { Connect, Query } from '../config/mysql';
 const NAMESPACE = 'Admin';
 const createAdmin = async (req: Request, res: Response, next: NextFunction) => {
     logging.info(NAMESPACE, 'Inserting admin');
-    console.log("THIS IS THE REQ.BODY", req.body);
     
     let { email, firstName, lastName, gender, password, createdAt, updatedAt } = req.body;
   
@@ -16,6 +15,42 @@ const createAdmin = async (req: Request, res: Response, next: NextFunction) => {
             Query(connection, query)
                 .then((result) => {
                     logging.info(NAMESPACE, 'admin created: ', result);
+
+                    return res.status(200).json({
+                        result
+                    });
+                })
+                .catch((error) => {
+                    logging.error(NAMESPACE, error.message, error);
+
+                    return res.status(200).json({
+                        message: error.message,
+                        error
+                    });
+                })
+                .finally(() => {
+                    logging.info(NAMESPACE, 'Closing connection.');
+                    connection.end();
+                });
+        })
+        .catch((error) => {
+            logging.error(NAMESPACE, error.message, error);
+
+            return res.status(200).json({
+                message: error.message,
+                error
+            });
+        });
+};
+const login = async (req: Request, res: Response, next: NextFunction) => { 
+    let { email, password} = req.body;
+    let query = `SELECT * FROM user WHERE email = "${email}" AND password = "${password}" AND type="admin"`
+     
+    Connect()
+        .then((connection) => {
+            Query(connection, query)
+                .then((result) => {
+                    logging.info(NAMESPACE, 'login admmin. ', result);
 
                     return res.status(200).json({
                         result
@@ -118,4 +153,4 @@ const getAdminByID = async (req: Request, res: Response, next: NextFunction) => 
         });
 };
 
-export default { getAllAdmin, getAdminByID, createAdmin };
+export default { getAllAdmin, getAdminByID, createAdmin, login };

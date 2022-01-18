@@ -71,12 +71,16 @@ const RegisterPage = () => {
   return (
       <>
       <Breadcrumb>
-                <Breadcrumb.Item href="/">
+                <Breadcrumb.Item href="/home">
                     <HomeOutlined />
                 </Breadcrumb.Item>
-                <Breadcrumb.Item href="/users">
+                <Breadcrumb.Item href="/admin">
                     <UserOutlined />
                     <span>Admin List</span>
+                </Breadcrumb.Item>
+                <Breadcrumb.Item href="/admin/create">
+                    <UserOutlined />
+                    <span>Create admin</span>
                 </Breadcrumb.Item>
             </Breadcrumb>
             <Row>

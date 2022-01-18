@@ -94,7 +94,7 @@ function search(rows : any) {
     return (
         <>
             <Breadcrumb>
-                <Breadcrumb.Item href="/">
+                <Breadcrumb.Item href="/home">
                     <HomeOutlined />
                 </Breadcrumb.Item>
                 <Breadcrumb.Item href="/users">

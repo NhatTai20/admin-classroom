@@ -15,13 +15,13 @@ export default function NavBar() {
 
                         <>
                             <Menu.Item key="home">
-                                <Link to="/">Home</Link>
+                                <Link to="/home">Home</Link>
                             </Menu.Item>
                             <Menu.Item key="users">
                                 <Link to="/users">Users</Link>
                             </Menu.Item>
-                            <Menu.Item key="accounts">
-                                <Link to="/accounts">Accounts</Link>
+                            <Menu.Item key="admin">
+                                <Link to="/admin">Admin</Link>
                             </Menu.Item>
                             <Menu.Item key="courses">
                                 <Link to="/courses">Courses</Link>

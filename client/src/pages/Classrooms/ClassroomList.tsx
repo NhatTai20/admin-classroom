@@ -75,7 +75,7 @@ const [q, setQ] = useState("");
         <>
         <Breadcrumb style={{ margin: '16px 0' }}>
         <Breadcrumb.Item>
-          <Link to="/">Home</Link>
+          <Link to="/home">Home</Link>
         </Breadcrumb.Item>
         <Breadcrumb.Item>Courses</Breadcrumb.Item>
       </Breadcrumb>

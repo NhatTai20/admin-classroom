@@ -10,15 +10,16 @@ import UserEditPage from './pages/Users/UserEditPage';
 import UserListPage from './pages/Users/UserListPage';
 import UserViewPage from './pages/Users/UserViewPage';
 import AdminList from './pages/Admin/AdminList';
-
+import HomePage from './pages/Auth/Home';
 function App() {
   return (
     <div>
+      <Layout className='layout'>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoginPage/>}/>
-          
-          <Route path="/register" element={<RegisterPage/>}/>
+          <Route path="/home" element={<HomePage/>}/>
+     
 
           <Route path="/courses" element={<ClassroomList/>}/>
 
@@ -31,7 +32,7 @@ function App() {
 
         </Routes>
       </BrowserRouter>
-
+      </Layout>
     </div>
   );
 }
