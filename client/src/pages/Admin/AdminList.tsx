@@ -34,7 +34,7 @@ const UserListPage = () => {
     const navigate = useNavigate();
   useEffect(() => {
    async function fetchMyAPI() {
-    let respone = await fetch('http://127.0.0.1:3001/api/admin/getAllAdmin');
+    let respone = await fetch('https://admin-classroom-server.herokuapp.com/api/admin/getAllAdmin');
     let responeJSON = await respone.json();
     setAdmin(responeJSON.results);
    }

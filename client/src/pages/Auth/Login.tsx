@@ -8,7 +8,7 @@ const LoginPage = () => {
   const [loginStatus, setLoginStatus] = useState("");
   const navigate = useNavigate();
   const onFinish = (values:any) => {
-    Axios.post('http://127.0.0.1:3001/api/admin/login', {
+    Axios.post('https://admin-classroom-server.herokuapp.com/api/admin/login', {
           email: values.email,
           password: values.password,
       }).then((respone) => {

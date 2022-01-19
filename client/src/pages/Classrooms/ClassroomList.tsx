@@ -14,7 +14,7 @@ const ClassroomList = () => {
   const [courses, setCourses] = useState([]);
   useEffect(() => {
    async function fetchMyAPI() {
-    let respone = await fetch('http://127.0.0.1:3001/api/courses/getAllCourses');
+    let respone = await fetch('https://admin-classroom-server.herokuapp.com/api/courses/getAllCourses');
     let responeJSON = await respone.json();
     setCourses(responeJSON.results);
    }

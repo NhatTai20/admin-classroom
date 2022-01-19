@@ -54,7 +54,7 @@ const RegisterPage = () => {
   const [form] = Form.useForm();
     const navigate = useNavigate();
   const onFinish = (values: any) => {
-    Axios.post('http://127.0.0.1:3001/api/admin/create', {
+    Axios.post('https://admin-classroom-server.herokuapp.com/api/admin/create', {
         email: values.email,
         firstName: values.firstName,
         lastName: values.lastName,

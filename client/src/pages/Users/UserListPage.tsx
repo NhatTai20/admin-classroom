@@ -35,7 +35,7 @@ const UserListPage = () => {
     const [users, setUsers] = useState([]);
   useEffect(() => {
    async function fetchMyAPI() {
-    let respone = await fetch('http://127.0.0.1:3001/api/users/getAllUser');
+    let respone = await fetch('https://admin-classroom-server.herokuapp.com/api/users/getAllUser');
     let responeJSON = await respone.json();
     setUsers(responeJSON.results);
    }
@@ -160,7 +160,7 @@ export default UserListPage;
 
 function handleEditID(stdID: any, id: any) {
     const data = { stdID: stdID };
-    fetch(`http://127.0.0.1:3001/api/users/edit/${id}`,
+    fetch(`https://admin-classroom-server.herokuapp.com/api/users/edit/${id}`,
     {
         method: 'PUT',
         headers: {
@@ -180,7 +180,7 @@ function handleEditID(stdID: any, id: any) {
 
 
 function handleBan(id: any) {
-    fetch(`http://127.0.0.1:3001/api/users/ban/${id}`,
+    fetch(`https://admin-classroom-server.herokuapp.com/api/users/ban/${id}`,
     {
         method: 'PUT'
     })
