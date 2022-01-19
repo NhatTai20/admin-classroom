@@ -8,7 +8,9 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const express_1 = __importDefault(require("express"));
 const logging_1 = __importDefault(require("./config/logging"));
 const config_1 = __importDefault(require("./config/config"));
-const sample_1 = __importDefault(require("./routes/sample"));
+const courses_1 = __importDefault(require("./routes/courses"));
+const users_1 = __importDefault(require("./routes/users"));
+const admin_1 = __importDefault(require("./routes/admin"));
 const NAMESPACE = 'Server';
 const router = (0, express_1.default)();
 /** Log the request */
@@ -35,7 +37,9 @@ router.use((req, res, next) => {
     next();
 });
 /** Routes go here */
-router.use('/api/sample', sample_1.default);
+router.use('/api/courses', courses_1.default);
+router.use('/api/users', users_1.default);
+router.use('/api/admin', admin_1.default);
 /** Error handling */
 router.use((req, res, next) => {
     const error = new Error('Not found');
